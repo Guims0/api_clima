@@ -91,7 +91,13 @@ public class ClimaService {
 
         List<PrevisaoDiariaDto> previsao = buscarPrevisao5Dias(cidade);
 
-        return new ClimaCompletoDto(atual.name(), atual, previsao);
+        ClimaAtualResponseDto agora = new ClimaAtualResponseDto(
+                atual.name(),
+                atual.main().temp(),
+                atual.main().sensacao(),
+                atual.weather().get(0).descricao()
+        );
+        return new ClimaCompletoDto(atual.name(), agora, previsao);
     }
 
     public List<PrevisaoDiariaDto> buscarPrevisao5Dias(String cidade) {
